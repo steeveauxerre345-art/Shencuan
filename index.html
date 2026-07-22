@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>沈川个人分享页</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"PingFang SC",Microsoft YaHei,sans-serif}
+    body{background:#f6f7fb;padding:30px 16px;color:#333;max-width:800px;margin:0 auto}
+    .header{text-align:center;margin-bottom:40px}
+    .logo-box{
+      width:110px;height:110px;border-radius:28px;
+      background:linear-gradient(135deg,#7b61ff,#ff66cc);
+      margin:0 auto 16px;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 8px 30px rgba(123,97,255,0.35);
+      font-size:42px;color:white;font-weight:bold
+    }
+    .title{font-size:32px;font-weight:bold;background:linear-gradient(90deg,#7b61ff,#ff5599);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .qq-box{
+      display:inline-block;margin-top:14px;padding:10px 22px;
+      background:white;border-radius:50px;box-shadow:0 2px 8px #00000012;
+      font-size:17px
+    }
+    .resource-title{
+      font-size:22px;
+      margin-bottom:16px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .item-card{
+      background:white;border-radius:16px;margin-bottom:18px;
+      box-shadow:0 3px 12px #0000000f;overflow:hidden
+    }
+    .card-head{
+      padding:18px 20px;display:flex;justify-content:space-between;align-items:center;
+      font-size:20px;font-weight:bold;cursor:pointer
+    }
+    .card-body{padding:0 20px 22px;display:none}
+    .desc{color:#666;line-height:1.6;margin-bottom:18px}
+    .btn-group{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+    .btn{
+      padding:14px 0;border:none;border-radius:12px;color:white;
+      font-size:16px;font-weight:bold;cursor:pointer
+    }
+    .btn-quark{background:#ff6347}
+    .btn-xunlei{background:#22a7ff}
+    .btn-tutorial{background:#17c37b}
+    .btn-123{background:#f7941d}
+    .btn-qq{background:#12B7F5}
+    .btn-ks{background:#FF2E4D}
+    .btn-douyin{background:#000000}
+    .active .card-body{display:block}
+    /*弹窗样式*/
+    .modal-mask{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.5);display:none;place-items:center;z-index:999
+    }
+    .modal-box{
+      width:85%;max-width:420px;background:#fff;border-radius:16px;padding:24px;
+    }
+    .modal-title{font-size:20px;font-weight:bold;margin-bottom:12px}
+    .modal-account{
+      font-size:18px;padding:12px;background:#f5f5f5;border-radius:8px;margin:16px 0;
+      word-break:break-all
+    }
+    .modal-tip{color:#666;margin-bottom:20px}
+    .modal-close{
+      width:100%;padding:12px;background:#7b61ff;color:#fff;border:none;
+      border-radius:8px;font-size:16px;cursor:pointer
+    }
+  </style>
+</head>
+<body>
+<div class="header">
+  <div class="logo-box">SC</div>
+  <h1 class="title">沈川个人分享页 ✅</h1>
+  <div class="qq-box">资源持续更新中</div>
+</div>
+
+<div class="resource-wrap">
+  <h2 class="resource-title">📦 资源列表</h2>
+
+  <div class="item-card active">
+    <div class="card-head" onclick="toggleCard(this.parentElement)">
+      <span>📞 本人联系方式</span>
+      <span>⌃</span>
+    </div>
+    <div class="card-body">
+      <p class="desc">点击查看账号，可复制后前往对应软件手动添加</p>
+      <div class="btn-group">
+        <button class="btn btn-qq" onclick="showModal('QQ账号','2181678878')">QQ联系</button>
+        <button class="btn btn-ks" onclick="showModal('快手账号','jhx1103010')">快手主页</button>
+        <button class="btn btn-douyin" onclick="showModal('抖音账号','jhx110412')">抖音主页</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="item-card">
+    <div class="card-head" onclick="toggleCard(this.parentElement)">
+      <span>工具名称</span>
+      <span>⌄</span>
+    </div>
+    <div class="card-body">
+      <p class="desc">在这里填写工具介绍文字</p>
+      <div class="btn-group">
+        <button class="btn btn-123" onclick="window.open('https://1839698406.share.123pan.cn/123pan/6Oo2Td-PC6ah')">123云盘</button>
+        <button class="btn btn-quark" onclick="alert('链接暂未开放，敬请期待')">夸克网盘</button>
+        <button class="btn btn-xunlei" onclick="alert('https://pan.xunlei.com/s/VOy9a4S-d9mWl8wUA4TTzyzIA1?pwd=hrnc#')">迅雷网盘</button>
+        <button class="btn btn-tutorial" onclick="alert('教程暂未开放，敬请期待')">使用教程</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--账号弹窗组件-->
+<div class="modal-mask" id="accountModal">
+  <div class="modal-box">
+    <div class="modal-title" id="mTitle"></div>
+    <div class="modal-account" id="mAccount"></div>
+    <div class="modal-tip">复制账号，打开对应APP手动搜索添加</div>
+    <button class="modal-close" onclick="closeModal()">关闭</button>
+  </div>
+</div>
+
+<script>
+//折叠手风琴
+function toggleCard(currentCard){
+  const allCards = document.querySelectorAll('.item-card');
+  const isOpen = currentCard.classList.contains('active');
+  allCards.forEach(card=>{
+    card.classList.remove('active');
+    card.querySelector('.card-head span:last-child').innerText = '⌄';
+  })
+  if(!isOpen){
+    currentCard.classList.add('active');
+    currentCard.querySelector('.card-head span:last-child').innerText = '⌃';
+  }
+}
+//弹出账号弹窗
+function showModal(title,account){
+  document.getElementById('mTitle').innerText = title;
+  document.getElementById('mAccount').innerText = account;
+  document.getElementById('accountModal').style.display = 'grid';
+}
+//关闭弹窗
+function closeModal(){
+  document.getElementById('accountModal').style.display = 'none';
+}
+</script>
+</body>
+</html>
